@@ -1,0 +1,46 @@
+==> SR
+INSERT INTO UserLogInfo(ULID, WUserID, Years, Months, Days, Actions, Status, JobCode, Hours, Minutes, Seconds, DevID)
+SELECT DevUlId, DevUserID, DevYears, DevMonths, DevDays, 0, 1, 0, DevHours, DevMinutes, DevSeconds, DevDeviceID FROM DeviceVsDatabase  
+
+
+==> TK
+UPDATE raw
+SET raw.USERID = usr.USERID, raw.CHECKTIME = raw.CHECKTIME2
+FROM RawDataFromDevices raw
+INNER JOIN USERINFO usr ON raw.EMPID = usr.BADGENUMBER
+
+===================================
+SELECT * FROM RawDataFromDevice
+
+==================================
+SELECT *
+FROM RawDataForNorming
+WHERE CONVERT(date, CheckTime) BETWEEN '0000-00-00' AND '0000-00-00'
+
+
+==> Delete Fingerprint duplicate records
+WITH cte AS (
+SELECT 
+WUserID, 
+Years,
+Months, 
+Days, 
+Hours, 
+Minutes, 
+Seconds, 
+DevID,
+LocationID,
+
+ROW_NUMBER() OVER(
+PARTITION BY WUserID, Years, Months, Days, Hours, Minutes, Seconds, DevID, LocationID
+ORDER BY WUserID, Years, Months, Days, Hours, Minutes, Seconds, DevID,LocationID
+) row_num
+FROM UserLogInfo
+)
+
+SELECT *
+FROM cte
+WHERE row_num > 1
+
+
+
