@@ -1,9 +1,9 @@
-==> SR
+==> Savan Resorts
 INSERT INTO UserLogInfo(ULID, WUserID, Years, Months, Days, Actions, Status, JobCode, Hours, Minutes, Seconds, DevID)
 SELECT DevUlId, DevUserID, DevYears, DevMonths, DevDays, 0, 1, 0, DevHours, DevMinutes, DevSeconds, DevDeviceID FROM DeviceVsDatabase  
 
 
-==> TK
+==> Thakhek
 UPDATE raw
 SET raw.USERID = usr.USERID, raw.CHECKTIME = raw.CHECKTIME2
 FROM RawDataFromDevices raw
