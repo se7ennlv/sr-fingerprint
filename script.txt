@@ -18,7 +18,7 @@ FROM RawDataForNorming
 WHERE CONVERT(date, CheckTime) BETWEEN '0000-00-00' AND '0000-00-00'
 
 
-==> Delete Fingerprint duplicate records
+==> Delete Fingerprint duplicate records (Optional)
 WITH cte AS (
 SELECT 
 WUserID, 
