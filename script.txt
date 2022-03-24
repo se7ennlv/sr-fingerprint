@@ -10,7 +10,7 @@ FROM RawDataFromDevices raw
 INNER JOIN USERINFO usr ON raw.EMPID = usr.BADGENUMBER
 
 ===================================
-SELECT * FROM RawDataFromDevice
+SELECT * FROM RawDataFromDevices
 
 ==================================
 SELECT *
